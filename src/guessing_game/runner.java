@@ -13,7 +13,7 @@ public class runner{
     public runner() {
     	int n=Home.getNumber_of_tries();
     	Random rand=new Random();
-        int computerNumber = rand.nextInt(101);
+        int computerNumber = rand.nextInt(Home.getRange())+1;
         int userAnswer = 0;
        // System.out.println("The correct guess is " + computerNumber);
         count = 0;
@@ -27,7 +27,7 @@ public class runner{
         while (userAnswer != computerNumber&& count<n)
         {
             String response = JOptionPane.showInputDialog(null,
-                "Enter a guess between 1 and 100", "Guessing Game", 3);
+                "Enter a guess between 1 and "+Home.getRange(), "Guessing Game", 3);
             
             userAnswer = Integer.parseInt(response);
             if (userAnswer ==computerNumber) {
@@ -50,6 +50,12 @@ public class runner{
     }
 
     public static String determineGuess(int userAnswer, int computerNumber){
+    	if (userAnswer>Home.getRange()) {
+    		return "your guess is out of range";
+    	}
+    	if (userAnswer<0) {
+    		return "Your guess should e positive";
+    	}
         if (userAnswer <=0 || userAnswer >100) {
             return "Your guess is invalid";
         }
