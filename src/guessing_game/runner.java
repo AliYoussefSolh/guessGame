@@ -1,11 +1,11 @@
 package guessing_game;
 
+
 import java.util.Random;
 
 import javax.swing.*;
 
 public class runner{
-	//int n=Home.getNumber_of_tries();
 	static int count;
 	public static int getcount() {
 		return count;
@@ -15,36 +15,39 @@ public class runner{
     	Random rand=new Random();
         int computerNumber = rand.nextInt(Home.getRange())+1;
         int userAnswer = 0;
-       // System.out.println("The correct guess is " + computerNumber);
         count = 0;
-        //enter the number of tries
-        //enter name and such info
-        //max score
-        //give up button
-        //play again
-        //show numner of guesses
+        
         boolean pass=false;
         while (userAnswer != computerNumber&& count<n)
         {
             String response = JOptionPane.showInputDialog(null,
                 "Enter a guess between 1 and "+Home.getRange(), "Guessing Game", 3);
-            
-            userAnswer = Integer.parseInt(response);
-            if (userAnswer ==computerNumber) {
-            	pass=true;
+            try {
+            	userAnswer = Integer.parseInt(response);
+                if (userAnswer ==computerNumber) {
+                	pass=true;
+                }
+                JOptionPane.showMessageDialog(null, ""+ determineGuess(userAnswer, computerNumber));
+                count++;
+              
+                Home.counter.setText(""+count);
+            }catch(NumberFormatException e) {
+            	JOptionPane.showMessageDialog(null, "Please enter a number");
             }
-            JOptionPane.showMessageDialog(null, ""+ determineGuess(userAnswer, computerNumber));
-            count++;
-          //  Home.countt.setText(String.valueOf(count));
-            Home.counter.setText(""+count);
+            
+            
         }
         if (pass) {
-        	//Home.success.setText("Congratulations.YOU WON");
+        	
         	JOptionPane.showMessageDialog(null,"Congratulations.YOU WON");
+        	Home.Input.setText("");
+			Home.Input2.setText("");
+			Home.error.setText("");
+			Home.counter.setText(0+"");
         	
         }else {
         	JOptionPane.showMessageDialog(null, "You ran out of attempts :(\nThe correct guess was " + computerNumber);
-        	//Home.success.setText("You ran out of attempts :(");
+        	
         	
         }
     }
@@ -53,12 +56,9 @@ public class runner{
     	if (userAnswer>Home.getRange()) {
     		return "your guess is out of range";
     	}
-    	if (userAnswer<0) {
-    		return "Your guess should e positive";
+    	else if (userAnswer<0) {
+    		return "Your guess should be positive";
     	}
-        if (userAnswer <=0 || userAnswer >100) {
-            return "Your guess is invalid";
-        }
         else if (userAnswer == computerNumber ){
             return "Correct!";
         }

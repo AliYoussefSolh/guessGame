@@ -7,10 +7,11 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class Home extends JFrame implements ActionListener {
-	private JTextField Input,Input2;
+	public  static JTextField Input,Input2;
 	public static JTextField counter=new JTextField();
 	private static int number_of_tries = 0;
 	private static int range= 2;
+	public static JLabel error;
 	public static int getRange() {
 		return range;
 	}
@@ -19,7 +20,7 @@ public class Home extends JFrame implements ActionListener {
 		Home.range = range;
 	}
 
-	private JLabel error;
+	
 	//public static JLabel success;
 	private JButton button = new JButton("Continue to game");
 	private JButton st = new JButton("Start new game");
@@ -88,46 +89,26 @@ public class Home extends JFrame implements ActionListener {
 		
 		this.setVisible(true);
 
-//		signUp = new JButton("click here to sign up");
-//		logIn = new JButton("click here to log in");
-//		signUp.setBounds(67, 40, 149 ,50);
-//		signUp.addActionListener(this);
-//		logIn.setBounds(67, 100, 149 ,50);
-//		logIn.addActionListener(this);
-//		this.add(signUp);
-//		this.add(logIn);
-//		
-//		this.setVisible(true);
+
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == button) {
-//			new runner();
+
 
 			try {
 				number_of_tries = Integer.parseInt(Input.getText());
 				range= Integer.parseInt(Input2.getText());
-//				System.out.println(Input.getText());
-//				System.out.println(number_of_tries);
+
 				new runner();
 				// pass=true;
 				error.setText("");
 			} catch (NumberFormatException ex) {
 				error.setText("Please enter a valid number to start the game.");
 			}
-//			try {
-//				range= Integer.parseInt(Input2.getText());
-//				
-////				System.out.println(Input.getText());
-////				System.out.println(number_of_tries);
-//				new runner();
-//				// pass=true;
-//				error.setText("");
-//			} catch (NumberFormatException ex) {
-//				error.setText("Please enter a valid range to start the game.");
-//			}
+
 
 		}else if (e.getSource()==st) {
 			Input.setText("");
